@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./src/github.com/gookit/color"
+	"github.com/gookit/color"
 )
 
 func main() {
