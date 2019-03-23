@@ -8,4 +8,6 @@ echo "Start the program..."
 go get github.com/gookit/color
 
 # install
-go install github.com/gookit/color
+#go install github.com/gookit/color
+
+echo "Finish the program!"
