@@ -3,6 +3,7 @@
 echo "Dependent libraries installation"
 export GOPATH=./src
 
-go get github.com/gookit/color
+go get
+go install
 
 echo "Finish the program!"
