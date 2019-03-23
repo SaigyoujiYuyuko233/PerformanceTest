@@ -45,6 +45,6 @@ func main() {
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
-	color.White.Println(" - CPU信息: " + cpu_modul_name + "*" + cpu_number.String() )
+	color.White.Println(" - CPU信息: " + cpu_modul_buf.String() )
 
 }
