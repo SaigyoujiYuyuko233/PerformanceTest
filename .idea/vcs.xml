@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gookit/color" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/xclpkg/clcolor" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/xclpkg" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/xclpkg" vcs="Git" />
   </component>
