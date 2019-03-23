@@ -41,7 +41,7 @@ func main() {
 	exec_cmd = exec.Command("cat /proc/cpuinfo | grep \"model name\"")
 	var cpu_modul_buf bytes.Buffer
 	exec_cmd.Stdout = &cpu_modul_buf
-	var cpu_modul_name = cpu_modul_buf.String()
+	//var cpu_modul_name = cpu_modul_buf.String()
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
