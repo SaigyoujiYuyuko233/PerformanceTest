@@ -1,7 +1,7 @@
 package main
 
 import (
-	"color"
+	"./src/color"
 	"fmt"
 )
 
