@@ -63,7 +63,8 @@ func main() {
 	memory = strings.Replace(memory,"\n","",-1)
 	memory = strings.Replace(memory,"kB","",-1)
 	memory_num,err := strconv.ParseInt(memory,10,64)
-	memory = strconv.FormatFloat(float64(memory_num/1024/1024), 'f', 2, 64)
+	//memory = strconv.FormatFloat(float64(memory_num/1024/1024), 'f', 2, 64)
+	memory = string(memory_num);
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
