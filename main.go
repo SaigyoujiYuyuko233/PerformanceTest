@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gookit/color"
 	"os"
 	"os/exec"
@@ -32,8 +33,9 @@ func main() {
 	if err == nil {}
 
 	// cpu信息
-	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo |grep \"physical id\"|sort |uniq|wc –l")
+	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
 	var out,erra = exec_cmd.Output()
+	fmt.Print(byteString(out));
 	if erra != nil {
 
 	}
@@ -46,7 +48,7 @@ func main() {
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
-	color.White.Println(" - CPU信息: " + byteString(out) )
+	//color.White.Println(" - CPU信息: " + byteString(out) )
 
 }
 
