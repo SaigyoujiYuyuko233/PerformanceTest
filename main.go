@@ -3,13 +3,21 @@ package main
 import (
 	"crypto/md5"
 	"crypto/sha1"
+	"flag"
 	"fmt"
 	"github.com/gookit/color"
+	"os/exec"
+	"runtime"
 	"strconv"
 	"time"
 )
 
 func main() {
+
+	// arg
+	runningCore := flag.Int("core",1,"将要使用的CPU核数")
+	fullcore_mod :=  flag.Bool("daze",false,"使用全部核心运行")
+	flag.Parse()
 
 	// print the logo
 	color.Green.Print(" ____                    _             ____                           \r\n" +
@@ -23,7 +31,20 @@ func main() {
 	color.LightCyan.Println("[+] https://github.com/SaigyoujiYuyuko233/RunningServer")
 	color.LightCyan.Println("[+] Copyright © 2019 - " + time.Now().Format("2006") + " SaigyoujiYuyuko[3558168775]. All rights reserved.")
 
-	color.LightCyan.Println("")
+	if *fullcore_mod == true {
+		var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep \"cpu cores\" | wc -l")
+		out,err := exec_cmd.Output()
+		if err != nil {}
+
+		var core,err_str = strconv.Atoi(byteString(out))
+		if err_str != nil {}
+
+		color.LightBlue.Println("\n[da★ze~] Full core mode! Core: " + byteString(out))
+		runtime.GOMAXPROCS(core)
+	}else{
+		runtime.GOMAXPROCS(*runningCore)
+	}
+
 
 	/**
 	  *	获取信息
@@ -135,12 +156,49 @@ func main() {
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
 
 	hash_usetime_all := hash_usetime_1 + hash_usetime_2 + hash_usetime_3 + hash_usetime_4 + hash_usetime_5 + hash_usetime_6
-	hash_grade := (60 - float64(hash_usetime_all/1000/1000/1000/6))*100
+	hash_grade := (60 - float64(hash_usetime_all/1000/1000/1000/6))*200
 
-	color.LightCyan.Println("\n\n + 浮点测试完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
+	color.LightCyan.Print("\n\n + 哈希运算测试完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
 	color.Green.Print(strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
 	color.LightCyan.Print("  得分: ")
 	color.Green.Print(strconv.FormatFloat(hash_grade, 'f', 0, 64))
+
+
+	color.Gray.Println("\n\n--------------------------------------------------------")
+	color.Gray.Println("准备开始 MD5 计算测试")
+
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	md5_usetime_1 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_1/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 2 次哈希运算测试...")
+	md5_usetime_2 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_2/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 3 次哈希运算测试...")
+	md5_usetime_3 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_3/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 4 次哈希运算测试...")
+	md5_usetime_4 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_4/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 5 次哈希运算测试...")
+	md5_usetime_5 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_5/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 6 次哈希运算测试...")
+	md5_usetime_6 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
+
+	md5_usetime_all := md5_usetime_1 + md5_usetime_2 + md5_usetime_3 + md5_usetime_4 + md5_usetime_5 + md5_usetime_6
+	md5_grade := (60 - float64(md5_usetime_all/1000/1000/1000/6))*200
+
+	color.LightCyan.Print("\n\n + MD5 运算测试完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
+	color.Green.Print(strconv.FormatFloat(float64(md5_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
+	color.LightCyan.Print("  得分: ")
+	color.Green.Print(strconv.FormatFloat(md5_grade, 'f', 0, 64))
 
 }
 
