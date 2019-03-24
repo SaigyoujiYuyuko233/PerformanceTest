@@ -5,6 +5,7 @@ import (
 	"crypto/sha1"
 	"flag"
 	"github.com/gookit/color"
+	"os"
 	"os/exec"
 	"runtime"
 	"strconv"
@@ -45,8 +46,8 @@ func main() {
 	  */
 
 	// 主机名
-	//name, err := os.Hostname()
-	//if err == nil {}
+	name, err := os.Hostname()
+	if err == nil {}
 
 	// cpu信息
 	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
