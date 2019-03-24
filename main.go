@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gookit/color"
-	"os/exec"
 	"runtime"
 	"strconv"
 	"time"
@@ -32,16 +31,10 @@ func main() {
 	color.LightCyan.Println("[+] Copyright © 2019 - " + time.Now().Format("2006") + " SaigyoujiYuyuko[3558168775]. All rights reserved.")
 
 	if *fullcore_mod == true {
-		var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep \"cpu cores\" | wc -l")
-		out,err := exec_cmd.Output()
-		if err != nil {}
-
-		var core,err_str = strconv.Atoi(byteString(out))
-		if err_str != nil {}
-
-		color.LightBlue.Println("\n[da★ze~] Full core mode! Core: " + byteString(out))
-		runtime.GOMAXPROCS(core)
+		color.LightBlue.Println("\n[da★ze~] Full core mode! Core: " + strconv.Itoa(runtime.NumCPU()))
+		runtime.GOMAXPROCS(runtime.NumCPU())
 	}else{
+		color.LightBlue.Println("\n[Core] Core: " + strconv.Itoa(*runningCore))
 		runtime.GOMAXPROCS(*runningCore)
 	}
 
@@ -168,28 +161,28 @@ func main() {
 	color.Gray.Println("准备开始 MD5 计算测试")
 
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
-	md5_usetime_1 := runHashTest()
+	color.White.Print("\n开始第 1 次 MD5 运算测试...")
+	md5_usetime_1 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_1/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 2 次哈希运算测试...")
-	md5_usetime_2 := runHashTest()
+	color.White.Print("\n开始第 2 次 MD5 运算测试...")
+	md5_usetime_2 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_2/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 3 次哈希运算测试...")
-	md5_usetime_3 := runHashTest()
+	color.White.Print("\n开始第 3 次 MD5 运算测试...")
+	md5_usetime_3 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_3/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 4 次哈希运算测试...")
-	md5_usetime_4 := runHashTest()
+	color.White.Print("\n开始第 4 次 MD5 运算测试...")
+	md5_usetime_4 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_4/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 5 次哈希运算测试...")
-	md5_usetime_5 := runHashTest()
+	color.White.Print("\n开始第 5 次 MD5 运算测试...")
+	md5_usetime_5 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_5/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 6 次哈希运算测试...")
-	md5_usetime_6 := runHashTest()
+	color.White.Print("\n开始第 6 次 MD5 运算测试...")
+	md5_usetime_6 := runMd5Test()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
 
 	md5_usetime_all := md5_usetime_1 + md5_usetime_2 + md5_usetime_3 + md5_usetime_4 + md5_usetime_5 + md5_usetime_6
@@ -250,7 +243,7 @@ func runMd5Test() float64 {
 	var md_1 = "SaigyoujiYuyuko"
 	md_sum := []byte(md_1)
 
-	for i := 0;i < 1 ;i++  {
+	for i := 0;i < 40000000 ;i++  {
 		md5 := md5.New()
 		md5.Write([]byte(md_1 + byteString(md_sum)))
 		md_sum = md5.Sum(nil)
