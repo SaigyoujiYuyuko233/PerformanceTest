@@ -58,7 +58,7 @@ func main() {
 	out,err = exec_cmd.Output()
 	if err != nil {}
 
-	var memory = strings.Split(byteString(out),"MemTotal:        ")[1]	// cpu频率
+	var memory = strings.Replace(byteString(out),"MemTotal:        ","",-1)	// cpu频率
 	memory_num,err := strconv.Atoi(memory)
 	memory = strconv.Itoa(memory_num/1024/1024)
 
