@@ -5,8 +5,10 @@ import (
 	"crypto/sha1"
 	"flag"
 	"github.com/gookit/color"
+	"os/exec"
 	"runtime"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -46,7 +48,6 @@ func main() {
 	//name, err := os.Hostname()
 	//if err == nil {}
 
-	/*
 	// cpu信息
 	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
 	out,err := exec_cmd.Output()
@@ -83,7 +84,6 @@ func main() {
 	color.White.Println(" - 主机名: " + name )
 	color.White.Println(" - CPU信息: " + cpu_name + "@" + cpu_clock + "Mhz | " + cpu_cores + "核" )
 	color.White.Println(" - 内存信息: " + memory + "MB")
-	*/
 
 	color.White.Print("\n开始第 1 次浮点运算测试...")
 	float_usetime_1 := runFloatTest()
@@ -187,11 +187,18 @@ func main() {
 	md5_usetime_all := md5_usetime_1 + md5_usetime_2 + md5_usetime_3 + md5_usetime_4 + md5_usetime_5 + md5_usetime_6
 	md5_grade := (60 - float64(md5_usetime_all/1000/1000/1000/6))*200
 
-	color.LightCyan.Print("\n\n + MD5 运算测试完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
+	color.LightCyan.Print("\n\n + MD5 运算测试完成! 用时: " + strconv.FormatFloat(float64(md5_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
 	color.Green.Print(strconv.FormatFloat(float64(md5_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
 	color.LightCyan.Print("  得分: ")
 	color.Green.Print(strconv.FormatFloat(md5_grade, 'f', 0, 64))
 
+	// 计算得分
+	var grade = (float_grade + hash_grade + md5_grade)/3
+
+	color.Gray.Println("\n\n--------------------------------------------------------")
+	color.LightCyan.Print("最终得分: " + strconv.FormatFloat(float64(grade/1000/1000/1000/6), 'f', 0, 64))
+
+	color.LightGreen.Print("RunningServer 跑分测试完成! 结果仅供参考，分数会受当前系统状况影响\n\n")
 }
 
 
