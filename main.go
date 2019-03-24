@@ -70,6 +70,12 @@ func main() {
 	color.White.Println(" - CPU信息: " + cpu_name + "@" + cpu_clock + "Mhz | " + cpu_cores + "核" )
 	color.White.Println(" - 内存信息: " + memory + "MB")
 
+
+	color.White.Print("\n\n开始第 1 次浮点运算测试...")
+	usetime_1 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时:" + strconv.FormatFloat(float64(usetime_1), 'f', 8, 64))
+
+
 }
 
 
@@ -80,4 +86,20 @@ func byteString(p []byte) string {
 		}
 	}
 	return string(p)
+}
+
+func runFloatTest() float64 {
+	var start = time.Now().UnixNano()
+
+	var float_a = 2.33
+	var float_b = 0.3
+
+	var float_sum = 0.00
+
+	for i := 0;i < 100000000 ;i++  {
+		float_sum = float_a * float_b * float_sum
+	}
+
+	var end  = time.Now().UnixNano()
+	return float64(end - start)
 }
