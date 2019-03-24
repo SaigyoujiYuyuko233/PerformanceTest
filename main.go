@@ -33,10 +33,10 @@ func main() {
 	color.LightCyan.Println("[+] Copyright © 2019 - " + time.Now().Format("2006") + " SaigyoujiYuyuko[3558168775]. All rights reserved.")
 
 	if *fullcore_mod == true {
-		color.LightBlue.Println("\n[da★ze~] Full core mode! Core: " + strconv.Itoa(runtime.NumCPU()))
+		color.LightBlue.Println("\n[da★ze~] Full core mode! Core: " + strconv.Itoa(runtime.NumCPU()) + "\n")
 		runtime.GOMAXPROCS(runtime.NumCPU())
 	}else{
-		color.LightBlue.Println("\n[Core] Core: " + strconv.Itoa(*runningCore))
+		color.LightBlue.Println("\n[Core] Core: " + strconv.Itoa(*runningCore) + "\n")
 		runtime.GOMAXPROCS(*runningCore)
 	}
 
