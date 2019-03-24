@@ -4,6 +4,7 @@ import (
 	"github.com/gookit/color"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -52,9 +53,19 @@ func main() {
 	var cpu_clock = strings.Split(byteString(out),"cpu MHz		: ")[1]	// cpu频率
 	cpu_clock = strings.Replace(cpu_clock,"\n","",-1)
 
+	// 内存信息
+	exec_cmd = exec.Command("/bin/bash","-c","cat /proc/meminfo | grep \"MemTotal\"")
+	out,err = exec_cmd.Output()
+	if err != nil {}
+
+	var memory = strings.Split(byteString(out),"MemTotal:        ")[1]	// cpu频率
+	memory_num,err := strconv.Atoi(memory)
+	memory = strconv.Itoa(memory_num/1024/1024)
+
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
 	color.White.Println(" - CPU信息: " + cpu_name + "@" + cpu_clock + "Mhz | " + cpu_cores + "核" )
+	color.White.Println(" - 内存信息: " + memory + "GB")
 
 }
 
