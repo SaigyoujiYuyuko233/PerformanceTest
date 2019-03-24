@@ -37,10 +37,10 @@ func main() {
 	var out,erra = exec_cmd.Output()
 	if erra != nil {}
 
-	print(strings.Split(byteString(out)," ")[5])
+	//print(strings.Split(byteString(out)," ")[5])
 
-	//var cpu_name = strings.Split(byteString(out)," ")[1]	// cpu型号
-	//var cpu_cores = strings.Split(byteString(out)," ")[0]	// cpu核数
+	var cpu_name = strings.Split(byteString(out)," ")[7]	// cpu型号
+	var cpu_cores = strings.Split(byteString(out)," ")[5]	// cpu核数
 
 
 	// cpu信息 #2
@@ -51,7 +51,7 @@ func main() {
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
-	//color.White.Println(" - CPU信息: " + cpu_name + " | " + cpu_cores + "核" )
+	color.White.Println(" - CPU信息: " + cpu_name + " | " + cpu_cores + "核" )
 
 }
 
