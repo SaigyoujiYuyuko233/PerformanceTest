@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gookit/color"
 	"os"
 	"os/exec"
@@ -36,6 +37,8 @@ func main() {
 	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
 	var out,erra = exec_cmd.Output()
 	if erra != nil {}
+
+	fmt.Print(byteString(out))
 
 	var cpu_name = strings.Split(byteString(out)," ")[1]	// cpu型号
 	var cpu_cores = strings.Split(byteString(out)," ")[0]	// cpu核数
