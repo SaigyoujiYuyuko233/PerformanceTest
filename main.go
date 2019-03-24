@@ -4,6 +4,7 @@ import (
 	"github.com/gookit/color"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -58,8 +59,9 @@ func main() {
 	if err != nil {}
 
 	var memory = strings.Replace(byteString(out),"MemTotal:","",-1)	// 内存大小
-	//memory_num,err := strconv.Atoi(memory)
-	//memory = strconv.Itoa(memory_num/1024)
+	memory = strings.Replace(memory," ","",-1)
+	memory_num,err := strconv.Atoi(memory)
+	memory = strconv.Itoa(memory_num/1024)
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
