@@ -42,9 +42,9 @@ func main() {
 	var cpu_name = strings.Split(byteString(out),"  ")[3]	// cpu型号
 	var cpu_cores = strings.Split(byteString(out),"  ")[2]	// cpu核数
 
-	cpu_name = strings.Replace(cpu_name," ","",-1)
+	cpu_name = strings.Replace(cpu_name,"\n","",-1)
 	cpu_cores = strings.Replace(cpu_cores," ","",-1)
-	
+
 	// cpu信息 #2
 	//exec_cmd = exec.Command("cat /proc/cpuinfo | grep \"model name\"")
 	//var cpu_modul_buf bytes.Buffer
