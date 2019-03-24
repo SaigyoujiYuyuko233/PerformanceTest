@@ -39,8 +39,8 @@ func main() {
 
 	//print(strings.Split(byteString(out)," ")[5])
 
-	var cpu_name = strings.Split(byteString(out),"  ")[2]	// cpu型号
-	var cpu_cores = strings.Split(byteString(out),"  ")[1]	// cpu核数
+	var cpu_name = strings.Split(byteString(out),"  ")[3]	// cpu型号
+	var cpu_cores = strings.Split(byteString(out),"  ")[2]	// cpu核数
 
 
 	// cpu信息 #2
