@@ -73,7 +73,7 @@ func main() {
 
 	color.White.Print("\n\n开始第 1 次浮点运算测试...")
 	usetime_1 := runFloatTest()
-	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(usetime_1/1000/1000/10), 'f', 4, 64) + "s\n")
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(usetime_1/1000/1000/100), 'f', 4, 64) + "s\n")
 
 
 }
@@ -96,7 +96,7 @@ func runFloatTest() float64 {
 
 	var float_sum = 0.00
 
-	for i := 0;i < 1000000000 ;i++  {
+	for i := 0;i < 10000000000 ;i++  {
 		float_sum = float_a * float_b * float_sum
 	}
 
