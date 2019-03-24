@@ -57,9 +57,7 @@ func main() {
 	out,err = exec_cmd.Output()
 	if err != nil {}
 
-	var memory = strings.Replace(byteString(out),"MemTotal","",-1)	// 内存大小
-	memory = strings.Replace(byteString(out),":","",-1)
-	memory = strings.Replace(byteString(out)," ","",-1)
+	var memory = strings.Replace(byteString(out),"MemTotal:","",-1)	// 内存大小
 	//memory_num,err := strconv.Atoi(memory)
 	//memory = strconv.Itoa(memory_num/1024)
 
