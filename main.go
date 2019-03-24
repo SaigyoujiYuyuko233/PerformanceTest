@@ -58,9 +58,11 @@ func main() {
 	out,err = exec_cmd.Output()
 	if err != nil {}
 
-	var memory = strings.Replace(byteString(out),"MemTotal:        ","",-1)	// cpu频率
+	var memory = strings.Replace(byteString(out),"MemTotal","",-1)	// 内存大小
+	memory = strings.Replace(byteString(out),":","",-1)
+	memory = strings.Replace(byteString(out)," ","",-1)
 	memory_num,err := strconv.Atoi(memory)
-	memory = strconv.Itoa(memory_num/1024/1024)
+	memory = strconv.Itoa(memory_num/1024)
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
