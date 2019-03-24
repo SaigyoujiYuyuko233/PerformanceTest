@@ -1,11 +1,9 @@
 package main
 
 import (
+	"crypto/sha1"
 	"github.com/gookit/color"
-	"os"
-	"os/exec"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -30,9 +28,10 @@ func main() {
 	  */
 
 	// 主机名
-	name, err := os.Hostname()
-	if err == nil {}
+	//name, err := os.Hostname()
+	//if err == nil {}
 
+	/*
 	// cpu信息
 	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
 	out,err := exec_cmd.Output()
@@ -69,12 +68,69 @@ func main() {
 	color.White.Println(" - 主机名: " + name )
 	color.White.Println(" - CPU信息: " + cpu_name + "@" + cpu_clock + "Mhz | " + cpu_cores + "核" )
 	color.White.Println(" - 内存信息: " + memory + "MB")
+	*/
+
+	color.White.Print("\n开始第 1 次浮点运算测试...")
+	float_usetime_1 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_1/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 2 次浮点运算测试...")
+	float_usetime_2 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_2/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 3 次浮点运算测试...")
+	float_usetime_3 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_3/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 4 次浮点运算测试...")
+	float_usetime_4 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_4/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 5 次浮点运算测试...")
+	float_usetime_5 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_5/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 6 次浮点运算测试...")
+	float_usetime_6 := runFloatTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(float_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.LightCyan.Println("")
 
 
-	color.White.Print("\n\n开始第 1 次浮点运算测试...")
-	usetime_1 := runFloatTest()
-	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(usetime_1), 'f', 4, 64) + "ms\n")
+	float_usetime_all := float_usetime_1 + float_usetime_2 + float_usetime_3 + float_usetime_4 + float_usetime_5 + float_usetime_6
+	float_grade := (80 - float64(float_usetime_all/1000/1000/1000/6))*100
 
+	color.LightCyan.Println("\n浮点测试完成! 用时: " + strconv.FormatFloat(float64(float_usetime_all/1000/1000/1000), 'f', 4, 64) + "s  平均用时: ")
+	color.Green.Print(strconv.FormatFloat(float64(float_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
+	color.LightCyan.Print("  得分: ")
+	color.Green.Print(strconv.FormatFloat(float_grade, 'f', 0, 64))
+
+	color.Gray.Println("--------------------------------------------------------")
+	color.Gray.Println("准备开始哈希计算测试")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_1 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_1/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_2 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_2/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_3 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_3/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_4 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_4/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_5 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_5/1000/1000/1000), 'f', 4, 64) + "s")
+
+	color.White.Print("\n开始第 1 次哈希运算测试...")
+	hash_usetime_6 := runHashTest()
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
 
 }
 
@@ -96,8 +152,24 @@ func runFloatTest() float64 {
 
 	var float_sum = 0.00
 
-	for i := 0;i < 10000000000 ;i++  {
+	for i := 0;i < 50000000000 ;i++  {
 		float_sum = float_a * float_b * float_sum
+	}
+
+	var end  = time.Now().UnixNano()
+	return float64(end - start)
+}
+
+func runHashTest() float64 {
+	var start = time.Now().UnixNano()
+
+	var hash_1 = "SaigyoujiYuyuko"
+	hash_sum := []byte(hash_1)
+
+	for i := 0;i < 10000000000 ;i++  {
+		hash := sha1.New()
+		hash.Write([]byte(hash_1 + byteString(hash_sum)))
+		hash_sum = hash.Sum(nil)
 	}
 
 	var end  = time.Now().UnixNano()
