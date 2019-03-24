@@ -73,7 +73,7 @@ func main() {
 
 	color.White.Print("\n\n开始第 1 次浮点运算测试...")
 	usetime_1 := runFloatTest()
-	color.LightGreen.Print("  完成! 用时:" + strconv.FormatFloat(float64(usetime_1), 'f', 8, 64))
+	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(usetime_1/1000), 'f', 8, 64) + "s\n")
 
 
 }
