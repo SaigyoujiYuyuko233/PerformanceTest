@@ -32,7 +32,7 @@ func main() {
 	if err == nil {}
 
 	// cpu信息
-	var exec_cmd = exec.Command("cat /proc/cpuinfo |grep \"physical id\"|sort |uniq|wc –l")
+	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo |grep \"physical id\"|sort |uniq|wc –l")
 	var out,erra = exec_cmd.Output()
 	if erra != nil {
 
