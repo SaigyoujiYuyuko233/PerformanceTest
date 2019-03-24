@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"github.com/gookit/color"
 	"os"
 	"os/exec"
@@ -34,17 +33,29 @@ func main() {
 
 	// cpu信息
 	var exec_cmd = exec.Command("cat /proc/cpuinfo |grep \"physical id\"|sort |uniq|wc –l")
-	var cpu_number bytes.Buffer
-	exec_cmd.Stdout = &cpu_number
+	var out,erra = exec_cmd.Output()
+	if erra != nil {
+
+	}
 
 	// cpu信息 #2
-	exec_cmd = exec.Command("cat /proc/cpuinfo | grep \"model name\"")
-	var cpu_modul_buf bytes.Buffer
-	exec_cmd.Stdout = &cpu_modul_buf
+	//exec_cmd = exec.Command("cat /proc/cpuinfo | grep \"model name\"")
+	//var cpu_modul_buf bytes.Buffer
+	//exec_cmd.Stdout = &cpu_modul_buf
 	//var cpu_modul_name = cpu_modul_buf.String()
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
-	color.White.Println(" - CPU信息: " + cpu_modul_buf.String() )
+	color.White.Println(" - CPU信息: " + byteString(out) )
 
+}
+
+
+func byteString(p []byte) string {
+	for i := 0; i < len(p); i++ {
+		if p[i] == 0 {
+			return string(p[0:i])
+		}
+	}
+	return string(p)
 }
