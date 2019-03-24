@@ -197,7 +197,7 @@ func main() {
 	var grade = (float_grade + hash_grade + md5_grade)/3
 
 	color.Gray.Println("\n\n--------------------------------------------------------")
-	color.LightCyan.Print("最终得分: " + strconv.FormatFloat(float64(grade/1000/1000/1000/6), 'f', 0, 64))
+	color.LightCyan.Print("最终得分: " + strconv.FormatFloat(float64(grade), 'f', 0, 64))
 
 	color.LightGreen.Print("RunningServer 跑分测试完成! 结果仅供参考，分数会受当前系统状况影响\n\n")
 }
