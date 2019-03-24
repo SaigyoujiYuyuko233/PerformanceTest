@@ -63,7 +63,7 @@ func main() {
 	memory = strings.Replace(memory,"\n","",-1)
 	memory = strings.Replace(memory,"kB","",-1)
 	memory_num,err := strconv.Atoi(memory)
-	memory = strconv.Itoa(memory_num/1024)
+	memory = strconv.Itoa(memory_num/1024/1024)
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
