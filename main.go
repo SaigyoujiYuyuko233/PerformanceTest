@@ -49,7 +49,7 @@ func main() {
 	out,err = exec_cmd.Output()
 	if err != nil {}
 
-	var cpu_clock = strings.Split(byteString(out),"cpu MHz		: ")[0]	// cpu频率
+	var cpu_clock = strings.Split(byteString(out),"cpu MHz		: ")[1]	// cpu频率
 
 
 	color.White.Println("设备信息 >")
