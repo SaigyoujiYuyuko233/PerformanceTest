@@ -34,10 +34,8 @@ func main() {
 
 	// cpu信息
 	var exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c")
-	var out,erra = exec_cmd.Output()
-	if erra != nil {}
-
-	//print(strings.Split(byteString(out)," ")[5])
+	out,err := exec_cmd.Output()
+	if err != nil {}
 
 	var cpu_name = strings.Split(byteString(out),"  ")[3]	// cpu型号
 	var cpu_cores = strings.Split(byteString(out),"  ")[2]	// cpu核数
@@ -45,15 +43,18 @@ func main() {
 	cpu_name = strings.Replace(cpu_name,"\n","",-1)
 	cpu_cores = strings.Replace(cpu_cores," ","",-1)
 
+
 	// cpu信息 #2
-	//exec_cmd = exec.Command("cat /proc/cpuinfo | grep \"model name\"")
-	//var cpu_modul_buf bytes.Buffer
-	//exec_cmd.Stdout = &cpu_modul_buf
-	//var cpu_modul_name = cpu_modul_buf.String()
+	exec_cmd = exec.Command("/bin/bash","-c","cat /proc/cpuinfo |grep MHz|uniq")
+	out,err = exec_cmd.Output()
+	if err != nil {}
+
+	var cpu_clock = strings.Split(byteString(out),"cpu MHz		: ")[0]	// cpu频率
+
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
-	color.White.Println(" - CPU信息: " + cpu_name + " | " + cpu_cores + "核" )
+	color.White.Println(" - CPU信息: " + cpu_name + "@" + cpu_clock + "Mhz | " + cpu_cores + "核" )
 
 }
 
