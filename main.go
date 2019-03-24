@@ -50,7 +50,7 @@ func main() {
 	if err != nil {}
 
 	var cpu_clock = strings.Split(byteString(out),"cpu MHz		: ")[1]	// cpu频率
-
+	cpu_clock = strings.Replace(cpu_clock,"\n","",-1)
 
 	color.White.Println("设备信息 >")
 	color.White.Println(" - 主机名: " + name )
