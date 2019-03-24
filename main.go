@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/md5"
 	"crypto/sha1"
+	"fmt"
 	"github.com/gookit/color"
 	"strconv"
 	"time"
@@ -98,39 +100,47 @@ func main() {
 
 
 	float_usetime_all := float_usetime_1 + float_usetime_2 + float_usetime_3 + float_usetime_4 + float_usetime_5 + float_usetime_6
-	float_grade := (80 - float64(float_usetime_all/1000/1000/1000/6))*100
+	float_grade := (60 - float64(float_usetime_all/1000/1000/1000/6))*100
 
-	color.LightCyan.Println("\n浮点测试完成! 用时: " + strconv.FormatFloat(float64(float_usetime_all/1000/1000/1000), 'f', 4, 64) + "s  平均用时: ")
+	color.LightCyan.Print("\n + 浮点测试完成! 用时: " + strconv.FormatFloat(float64(float_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
 	color.Green.Print(strconv.FormatFloat(float64(float_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
 	color.LightCyan.Print("  得分: ")
 	color.Green.Print(strconv.FormatFloat(float_grade, 'f', 0, 64))
 
-	color.Gray.Println("--------------------------------------------------------")
+	color.Gray.Println("\n\n--------------------------------------------------------")
 	color.Gray.Println("准备开始哈希计算测试")
 
 	color.White.Print("\n开始第 1 次哈希运算测试...")
 	hash_usetime_1 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_1/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
+	color.White.Print("\n开始第 2 次哈希运算测试...")
 	hash_usetime_2 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_2/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
+	color.White.Print("\n开始第 3 次哈希运算测试...")
 	hash_usetime_3 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_3/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
+	color.White.Print("\n开始第 4 次哈希运算测试...")
 	hash_usetime_4 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_4/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
+	color.White.Print("\n开始第 5 次哈希运算测试...")
 	hash_usetime_5 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_5/1000/1000/1000), 'f', 4, 64) + "s")
 
-	color.White.Print("\n开始第 1 次哈希运算测试...")
+	color.White.Print("\n开始第 6 次哈希运算测试...")
 	hash_usetime_6 := runHashTest()
 	color.LightGreen.Print("  完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_6/1000/1000/1000), 'f', 4, 64) + "s")
+
+	hash_usetime_all := hash_usetime_1 + hash_usetime_2 + hash_usetime_3 + hash_usetime_4 + hash_usetime_5 + hash_usetime_6
+	hash_grade := (60 - float64(hash_usetime_all/1000/1000/1000/6))*100
+
+	color.LightCyan.Println("\n\n + 浮点测试完成! 用时: " + strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000), 'f', 4, 64) + "s | 平均用时: ")
+	color.Green.Print(strconv.FormatFloat(float64(hash_usetime_all/1000/1000/1000/6), 'f', 4, 64) + "s")
+	color.LightCyan.Print("  得分: ")
+	color.Green.Print(strconv.FormatFloat(hash_grade, 'f', 0, 64))
 
 }
 
@@ -166,10 +176,27 @@ func runHashTest() float64 {
 	var hash_1 = "SaigyoujiYuyuko"
 	hash_sum := []byte(hash_1)
 
-	for i := 0;i < 10000000000 ;i++  {
+	for i := 0;i < 40000000 ;i++  {
 		hash := sha1.New()
 		hash.Write([]byte(hash_1 + byteString(hash_sum)))
 		hash_sum = hash.Sum(nil)
+	}
+
+	var end  = time.Now().UnixNano()
+	return float64(end - start)
+}
+
+func runMd5Test() float64 {
+	var start = time.Now().UnixNano()
+
+	var md_1 = "SaigyoujiYuyuko"
+	md_sum := []byte(md_1)
+
+	for i := 0;i < 1 ;i++  {
+		md5 := md5.New()
+		md5.Write([]byte(md_1 + byteString(md_sum)))
+		md_sum = md5.Sum(nil)
+		fmt.Print(md_sum);
 	}
 
 	var end  = time.Now().UnixNano()
