@@ -38,7 +38,7 @@ func main() {
 	var out,erra = exec_cmd.Output()
 	if erra != nil {}
 
-	fmt.Print(strings.Split(byteString(out)," "))
+	fmt.Print("%v",strings.Split(byteString(out)," "))
 
 	var cpu_name = strings.Split(byteString(out)," ")[1]	// cpu型号
 	var cpu_cores = strings.Split(byteString(out)," ")[0]	// cpu核数
