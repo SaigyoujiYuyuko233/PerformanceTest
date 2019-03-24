@@ -4,7 +4,6 @@ import (
 	"crypto/md5"
 	"crypto/sha1"
 	"flag"
-	"fmt"
 	"github.com/gookit/color"
 	"runtime"
 	"strconv"
@@ -247,7 +246,6 @@ func runMd5Test() float64 {
 		md5 := md5.New()
 		md5.Write([]byte(md_1 + byteString(md_sum)))
 		md_sum = md5.Sum(nil)
-		fmt.Print(md_sum);
 	}
 
 	var end  = time.Now().UnixNano()
